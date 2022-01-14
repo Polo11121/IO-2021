@@ -1,0 +1,47 @@
+.Mui-focused,
+.Mui-focused fieldset {
+  color: #2c3e50 !important;
+  border-color: #2c3e50 !important;
+  outline: #2c3e50 !important;
+}
+
+.sign-up {
+  height: calc(100vh - 108px);
+  width: 100vw;
+  display: grid;
+  place-items: center;
+  background-color: #ecf0f1;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 40px 80px;
+    border: #2c3e50 2px solid;
+    border-radius: 20px;
+
+    &-inputs {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1rem;
+    }
+
+    &-input {
+      margin-bottom: 1rem !important;
+    }
+  }
+
+  &__button {
+    background-color: #2c3e50 !important;
+    color: #f1c40f !important;
+
+    &:hover {
+      color: #f2d50f !important;
+      border-color: #f2d50f !important;
+    }
+  }
+
+  &__link {
+    color: #f1c40f;
+  }
+}

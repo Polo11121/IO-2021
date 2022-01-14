@@ -1,0 +1,45 @@
+.orders-history {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  height: 100%;
+
+  &__title {
+    text-align: center;
+    color: #f1c40f;
+  }
+
+  &__button {
+    background-color: #f1c40f !important;
+    color: #2c3e50 !important;
+    margin-bottom: 20px !important;
+
+    &:hover {
+      background-color: #f2d50f !important;
+    }
+  }
+
+  &__orders::-webkit-scrollbar {
+    display: none;
+  }
+
+  &__orders {
+    overflow-y: scroll;
+    width: 80%;
+    height: 100%;
+  }
+
+  &__info {
+    display: flex;
+    width: 80%;
+    margin-bottom: 20px;
+
+    &__row {
+      color: #f1c40f;
+      text-align: center;
+      flex: 1;
+      margin: 0 auto;
+    }
+  }
+}
