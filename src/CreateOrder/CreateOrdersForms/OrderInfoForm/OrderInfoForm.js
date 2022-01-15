@@ -64,7 +64,7 @@ export const OrderInfoForm = ({
 
   const IOSSwitch = styled((props) => (
     <Switch
-      checked={cashOnDelivery}
+      checked={!!cashOnDelivery}
       onBlur={formik.handleBlur}
       onChange={handleSwitchChange}
       focusVisibleClassName=".Mui-focusVisible"
@@ -213,7 +213,7 @@ export const OrderInfoForm = ({
                 ),
               }}
               value={formik.values.value}
-              error={formik.errors.value || !formik.values.value}
+              error={Boolean(formik.errors.value || !formik.values.value)}
               helperText={
                 formik.errors.value && formik.touched.value
                   ? formik.errors.value

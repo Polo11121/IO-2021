@@ -312,7 +312,7 @@ export const CreateOrder = () => {
               </div>
             )}
             {activeStep !== 3 && (
-              <Button disabled={nextform()} onClick={handleNext}>
+              <Button disabled={Boolean(nextform())} onClick={handleNext}>
                 Dalej
               </Button>
             )}
@@ -329,7 +329,7 @@ export const CreateOrder = () => {
         />
         {activeStep === 0 && (
           <div className="create-order__next-button">
-            <Button disabled={nextform()} onClick={handleNext}>
+            <Button disabled={Boolean(nextform())} onClick={handleNext}>
               Dalej
             </Button>
           </div>

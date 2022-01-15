@@ -74,12 +74,12 @@ export const SignIn = () => {
           />
         </div>
         <Button
-          disabled={
+          disabled={Boolean(
             formik.errors.email ||
-            formik.errors.password ||
-            !formik.values.email ||
-            !formik.values.password
-          }
+              formik.errors.password ||
+              !formik.values.email ||
+              !formik.values.password
+          )}
           type="submit"
           className={
             formik.errors.email ||

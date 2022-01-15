@@ -112,14 +112,14 @@ export const SignUp = () => {
           />
         </div>
         <Button
-          disabled={
+          disabled={Boolean(
             formik.errors.password ||
-            formik.errors.repeatPassword ||
-            formik.errors.email ||
-            !formik.values.password ||
-            !formik.values.repeatPassword ||
-            !formik.values.email
-          }
+              formik.errors.repeatPassword ||
+              formik.errors.email ||
+              !formik.values.password ||
+              !formik.values.repeatPassword ||
+              !formik.values.email
+          )}
           type="submit"
           className={
             formik.errors.password ||
