@@ -23,41 +23,48 @@ export const OrdersHistory = ({ orders, setOrderInfo }) => {
   return (
     <div className="orders-history">
       <h1 className="orders-history__title">Historia zamówień</h1>
-      <Button onClick={handleClick} className="orders-history__button">
-        {isActiveOrders ? "Wszystkie zamówienia" : "Aktywne zamówienia"}
-      </Button>
-      <div className="orders-history__info">
-        <span className="orders-history__info__row">Numer zamówienia</span>
-        <span className="orders-history__info__row">Data utworzenia</span>
-        <span className="orders-history__info__row">Data aktualizacji</span>
-        <span className="orders-history__info__row">Status płatności</span>
-        <span className="orders-history__info__row">Status zamówienia</span>
-      </div>
-      <div className="orders-history__orders">
-        {isActiveOrders
-          ? activeOrders?.map((order) => (
-              <OrderCard
-                onClick={() => setOrderInfo(order)}
-                key={order.id}
-                orderNumber={order.id}
-                createDate={order.data.createDate}
-                updateDate={order.data.updateDate}
-                cashOnDelivery={order.data.cashOnDelivery}
-                status={order.data.status}
-              />
-            ))
-          : orders?.map((order) => (
-              <OrderCard
-                onClick={() => setOrderInfo(order)}
-                key={order.id}
-                orderNumber={order.id}
-                createDate={order.data.createDate}
-                updateDate={order.data.updateDate}
-                cashOnDelivery={order.data.cashOnDelivery}
-                status={order.data.status}
-              />
-            ))}
-      </div>
+      {orders?.length === 0 && orders !== null && (
+        <h2 className="orders-history__title">Brak zamówień !</h2>
+      )}
+      {orders?.length !== 0 && orders !== null && (
+        <>
+          <Button onClick={handleClick} className="orders-history__button">
+            {isActiveOrders ? "Wszystkie zamówienia" : "Aktywne zamówienia"}
+          </Button>
+          <div className="orders-history__info">
+            <span className="orders-history__info__row">Numer zamówienia</span>
+            <span className="orders-history__info__row">Data utworzenia</span>
+            <span className="orders-history__info__row">Data aktualizacji</span>
+            <span className="orders-history__info__row">Status płatności</span>
+            <span className="orders-history__info__row">Status zamówienia</span>
+          </div>
+          <div className="orders-history__orders">
+            {isActiveOrders
+              ? activeOrders?.map((order) => (
+                  <OrderCard
+                    onClick={() => setOrderInfo(order)}
+                    key={order.id}
+                    orderNumber={order.id}
+                    createDate={order.data.createDate}
+                    updateDate={order.data.updateDate}
+                    cashOnDelivery={order.data.cashOnDelivery}
+                    status={order.data.status}
+                  />
+                ))
+              : orders?.map((order) => (
+                  <OrderCard
+                    onClick={() => setOrderInfo(order)}
+                    key={order.id}
+                    orderNumber={order.id}
+                    createDate={order.data.createDate}
+                    updateDate={order.data.updateDate}
+                    cashOnDelivery={order.data.cashOnDelivery}
+                    status={order.data.status}
+                  />
+                ))}
+          </div>
+        </>
+      )}
     </div>
   );
 };

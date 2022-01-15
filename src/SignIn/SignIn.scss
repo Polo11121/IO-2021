@@ -20,6 +20,10 @@
     border: #2c3e50 2px solid;
     border-radius: 20px;
 
+    @media only screen and (max-width: 600px) {
+      border: 0;
+    }
+
     &-inputs {
       display: flex;
       flex-direction: column;
@@ -42,6 +46,18 @@
   }
 
   &__link {
-    color: #f1c40f;
+    color: #2c3e50;
+
+    &:hover {
+      color: #f1c40f;
+    }
+  }
+
+  &__text {
+    @media only screen and (max-width: 600px) {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+    }
   }
 }

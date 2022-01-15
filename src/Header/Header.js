@@ -49,7 +49,10 @@ export const Header = () => {
               className="header__avatar"
             >
               <Avatar alt={user?.email} src={user?.photoURL || user?.email} />
-              <span style={{ fontSize: "12px", color: "#f1c40f" }}>
+              <span
+                className="header__email"
+                style={{ fontSize: "12px", color: "#f1c40f" }}
+              >
                 {user?.email}
               </span>
             </div>
@@ -85,7 +88,7 @@ export const Header = () => {
             </Menu>
           </div>
         ) : (
-          <div>
+          <div className="header__buttons">
             <Link className="header__link" to="/signin">
               <Button className="header__link-button" variant="contained">
                 Zaloguj

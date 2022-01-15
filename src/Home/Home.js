@@ -12,7 +12,9 @@ export const Home = () => {
   return (
     <div className="home">
       {user?.displayName ? (
-        <h1 className="home__title">Miłej pracy {user?.displayName} !</h1>
+        <h1 style={{ textAlign: "center" }} className="home__title">
+          Miłej pracy {user?.displayName} !
+        </h1>
       ) : (
         <div className="home__buttons">
           <Link className="home__link" to="/createorder">

@@ -8,6 +8,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #f1c40f #2c3e50;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

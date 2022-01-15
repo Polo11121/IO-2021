@@ -18,7 +18,7 @@ export const MyProfile = () => {
   const user = useContext(AuthContext);
 
   const handleClose = async () => {
-    if (user?.displayName) {
+    if (user?.displayName && orderInfo?.data?.status !== orderInfoStatus) {
       let date_ob = new Date();
       let date = ("0" + date_ob.getDate()).slice(-2);
       let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
@@ -123,7 +123,7 @@ export const MyProfile = () => {
               <CloseIcon />
             </IconButton>
             <div className="my-profile__modal__first-row">
-              <div>
+              <div className="my-profile__modal__box">
                 <img src={box} height="250px" />
               </div>
               <div style={{ paddingLeft: "20px" }}>

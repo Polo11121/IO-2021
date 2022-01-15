@@ -125,6 +125,7 @@ export const OrderInfoForm = ({
     <form className="order-info-form">
       <h2> Jaki jest rozmiar paczki?</h2>
       <RadioGroup
+        className="order-info-form__radio-group"
         row
         aria-label="gender"
         name="size"
@@ -181,7 +182,7 @@ export const OrderInfoForm = ({
       >
         Wpisz wartość paczki i wybierz usługi dodatkowe
       </h3>
-      <div style={{ width: "70%", marginBottom: "100px" }}>
+      <div style={{ width: "70%", marginBottom: "50px" }}>
         <div className="order-info-form__info">
           <div className="order-info-form__info__label">
             Kto zleca usługe kurierską?

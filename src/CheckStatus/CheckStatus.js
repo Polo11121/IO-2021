@@ -42,14 +42,8 @@ export const CheckStatus = () => {
             <h1 className="check-status__modal__title">
               Zamowienie nr. {formik.values.orderNumber}
             </h1>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-around",
-                width: "90%",
-              }}
-            >
-              <div style={{ textAlign: "left" }}>
+            <div className="check-status__modal__info">
+              <div>
                 <div>Data utworzenia: {order?.createDate}</div>
                 <div>Data aktualizacji statusu: {order?.updateDate}</div>
                 <div>Status przesyłki: {order?.status}</div>
@@ -58,13 +52,13 @@ export const CheckStatus = () => {
                   {order?.cashOnDelivery ? "Przy odbiorze" : "Opłacona"}
                 </div>
               </div>
-              <div style={{ textAlign: "left" }}>
+              <div>
                 <div>Dane nadawcy:</div>
                 <div>{order?.sender?.street}</div>{" "}
                 <div>{order?.sender?.postCode}</div>
                 <div>{order?.sender?.name}</div>
               </div>
-              <div style={{ textAlign: "left" }}>
+              <div>
                 <div>Dane dostawcy:</div>
                 <div>{order?.reciver?.street}</div>
                 <div>{order?.reciver?.postCode}</div>

@@ -20,19 +20,33 @@
     }
   }
 
-  &__orders::-webkit-scrollbar {
-    display: none;
-  }
-
   &__orders {
-    overflow-y: scroll;
-    width: 80%;
+    overflow-y: auto;
+    width: 90%;
     height: 100%;
+    padding-right: 1rem;
+    padding-left: 1rem;
+
+    &::-webkit-scrollbar {
+      margin-left: 10px;
+      width: 12px;
+      height: 12px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #2c3e50;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #f1c40f;
+      border-radius: 10px;
+      border: 0px solid #ffffff;
+    }
   }
 
   &__info {
     display: flex;
-    width: 80%;
+    width: 90%;
     margin-bottom: 20px;
 
     &__row {

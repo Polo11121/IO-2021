@@ -12,7 +12,7 @@ export const Footer = () => (
     <Toolbar className="footer__toolbar">
       <div className="footer__toolbar-logo">
         <img src={logo} alt="logo" />
-        <p>All rights reserved</p>
+        <p className="footer__rights">All rights reserved</p>
       </div>
       <div className="footer__toolbar-socials">
         <YouTubeIcon className="footer__toolbar-social" fontSize="large" />

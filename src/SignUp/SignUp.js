@@ -140,9 +140,9 @@ export const SignUp = () => {
             Podany adres e-mail jest już zajęty
           </p>
         )}
-        <p>
+        <p className="sign-up__text">
           Masz już konto?
-          <Link className="sign-in__link" to="singup">
+          <Link className="sign-up__link" to="/signin">
             Zaloguj się!
           </Link>
         </p>

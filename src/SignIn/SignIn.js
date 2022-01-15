@@ -98,7 +98,7 @@ export const SignIn = () => {
             Błędny Email lub hasło !
           </p>
         )}
-        <p>
+        <p className="sign-in__text">
           Nie masz konta?
           <Link className="sign-in__link" to="/signup">
             Zarejestruj się!

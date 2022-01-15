@@ -274,7 +274,7 @@ export const CreateOrder = () => {
   return user ? (
     <div className="create-order">
       <div className="create-order__content">
-        <Stepper activeStep={activeStep}>
+        <Stepper className="create-order__steps" activeStep={activeStep}>
           {steps.map((label) => {
             const stepProps = {};
             const labelProps = {};
@@ -294,7 +294,7 @@ export const CreateOrder = () => {
               onClick={handleBack}
               sx={{ mr: 1 }}
             >
-              Cofnij
+              {activeStep !== 0 && "Cofnij"}
             </Button>
             {activeStep !== 3 && (
               <div>
@@ -327,6 +327,13 @@ export const CreateOrder = () => {
           onSubmit={formik.handleSubmit}
           orderNumber={orderNumber}
         />
+        {activeStep === 0 && (
+          <div className="create-order__next-button">
+            <Button disabled={nextform()} onClick={handleNext}>
+              Dalej
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   ) : (

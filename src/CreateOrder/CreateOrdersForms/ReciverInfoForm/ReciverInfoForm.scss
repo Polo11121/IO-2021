@@ -6,6 +6,10 @@
   margin: 0 auto;
   margin-bottom: 100px;
 
+  @media only screen and (max-width: 600px) {
+    width: 80%;
+  }
+
   & label,
   input {
     padding-left: 5px !important;
