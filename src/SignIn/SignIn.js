@@ -30,14 +30,14 @@ export const SignIn = () => {
     }),
     onSubmit: ({ email, password }) =>
       signInWithEmailAndPassword(auth, email, password)
-        .then((auth) => navigate("/"))
+        .then(() => navigate("/"))
         .catch(() => setError(true)),
   });
 
   return (
-    <div className="sign-in">
+    <main className="sign-in">
       <form className="sign-in__form" onSubmit={formik.handleSubmit}>
-        <div className="sign-in__form-inputs">
+        <div className="sign-in__form__inputs">
           <TextField
             error={formik.errors.email && formik.touched.email}
             helperText={
@@ -47,7 +47,7 @@ export const SignIn = () => {
             }
             id="email"
             name="email"
-            className="sign-in__form-input"
+            className="sign-in__form__input"
             color="primary"
             label="Email"
             variant="outlined"
@@ -64,7 +64,7 @@ export const SignIn = () => {
             }
             id="password"
             name="password"
-            className="sign-in__form-input"
+            className="sign-in__form__input"
             label="Hasło"
             type="password"
             variant="outlined"
@@ -105,6 +105,6 @@ export const SignIn = () => {
           </Link>
         </p>
       </form>
-    </div>
+    </main>
   );
 };

@@ -4,8 +4,10 @@ import "./UserProfileInfo.scss";
 
 export const UserProfileInfo = ({ user, isCourier, orders }) =>
   isCourier ? (
-    <div className="user-profile-info">
+    <section className="user-profile-info">
       <Avatar
+        alt="avatar"
+        role="img"
         src={user?.photoURL}
         className="user-profile-info__avatar"
       ></Avatar>
@@ -18,10 +20,10 @@ export const UserProfileInfo = ({ user, isCourier, orders }) =>
       <h3 style={{ paddingTop: "0", marginTop: 0 }}>
         Wszystkie zamówienia: {orders?.length}
       </h3>
-    </div>
+    </section>
   ) : (
-    <div className="user-profile-info">
+    <section className="user-profile-info">
       <Avatar className="user-profile-info__avatar"></Avatar>
       <h2>{user.email}</h2>
-    </div>
+    </section>
   );

@@ -3,7 +3,7 @@ import { TextField } from "@mui/material";
 import "./ReciverInfoForm.scss";
 
 export const ReciverInfoForm = ({ formik }) => (
-  <div>
+  <main>
     <div className="reciver-info-form__title">
       <h2>Dane kontaktowe odbiorcy</h2>
       Powiadomimy odbiorcę o terminie dostawy, a nadawcę — gdy doręczymy paczkę
@@ -151,5 +151,5 @@ export const ReciverInfoForm = ({ formik }) => (
         </div>
       </div>
     </form>
-  </div>
+  </main>
 );

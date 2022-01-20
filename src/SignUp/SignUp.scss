@@ -24,13 +24,13 @@
       border: 0;
     }
 
-    &-inputs {
+    &__inputs {
       display: flex;
       flex-direction: column;
       margin-bottom: 1rem;
     }
 
-    &-input {
+    &__input {
       margin-bottom: 1rem !important;
     }
   }

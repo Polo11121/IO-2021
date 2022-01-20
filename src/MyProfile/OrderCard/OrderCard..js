@@ -10,7 +10,9 @@ export const OrderCard = ({
   status,
   onClick,
 }) => (
-  <div
+  <article
+    role="button"
+    tabIndex={1}
     onClick={onClick}
     data-for={orderNumber}
     data-tip={`Pokaż szczegóły zamówienia nr. ${orderNumber}`}
@@ -30,5 +32,5 @@ export const OrderCard = ({
       id={orderNumber}
       place="bottom"
     />
-  </div>
+  </article>
 );

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Button, Modal, TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import { doc, getDoc } from "firebase/firestore";
 import { useFormik } from "formik";
 import { db } from "../firebase";
+import { CheckStatusModal } from "./CheckStatusModal";
 import "./CheckStatus.scss";
 
 export const CheckStatus = () => {
@@ -36,48 +37,14 @@ export const CheckStatus = () => {
 
   return (
     <div className="check-status">
-      <Modal open={open} onClose={handleClose}>
-        <div className="check-status__modal">
-          <div className="check-status__modal__content">
-            <h1 className="check-status__modal__title">
-              Zamowienie nr. {formik.values.orderNumber}
-            </h1>
-            <div className="check-status__modal__info">
-              <div>
-                <div>Data utworzenia: {order?.createDate}</div>
-                <div>Data aktualizacji statusu: {order?.updateDate}</div>
-                <div>Status przesyłki: {order?.status}</div>
-                <div>
-                  Status płatności:{" "}
-                  {order?.cashOnDelivery ? "Przy odbiorze" : "Opłacona"}
-                </div>
-              </div>
-              <div>
-                <div>Dane nadawcy:</div>
-                <div>{order?.sender?.street}</div>{" "}
-                <div>{order?.sender?.postCode}</div>
-                <div>{order?.sender?.name}</div>
-              </div>
-              <div>
-                <div>Dane dostawcy:</div>
-                <div>{order?.reciver?.street}</div>
-                <div>{order?.reciver?.postCode}</div>
-                <div>{order?.reciver?.name}</div>
-              </div>
-            </div>
-            <Button
-              className="check-status__modal__button"
-              variant="contained"
-              type="submit"
-              onClick={handleClose}
-            >
-              Ok
-            </Button>
-          </div>
-        </div>
-      </Modal>
-      <div style={{ width: "100%" }}>
-        <p className="check-status__text">Śledź przesyłkę</p>
+      <CheckStatusModal
+        open={open}
+        handleClose={handleClose}
+        formik={formik}
+        order={order}
+      />
+      <main style={{ width: "100%" }}>
+        <h1 className="check-status__text">Śledź przesyłkę</h1>
         <form className="check-status__form" onSubmit={formik.handleSubmit}>
           <div className="check-status__form-input">
             <TextField
@@ -103,7 +70,7 @@ export const CheckStatus = () => {
             Śledź
           </Button>
         </form>
-      </div>
+      </main>
     </div>
   );
 };

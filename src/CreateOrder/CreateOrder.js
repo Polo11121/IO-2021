@@ -272,7 +272,7 @@ export const CreateOrder = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
 
   return user ? (
-    <div className="create-order">
+    <main className="create-order">
       <div className="create-order__content">
         <Stepper className="create-order__steps" activeStep={activeStep}>
           {steps.map((label) => {
@@ -335,7 +335,7 @@ export const CreateOrder = () => {
           </div>
         )}
       </div>
-    </div>
+    </main>
   ) : (
     <Error />
   );

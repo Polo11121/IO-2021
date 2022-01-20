@@ -33,7 +33,7 @@ export const Header = () => {
     });
 
   return (
-    <AppBar position="static">
+    <AppBar role="header" position="static">
       <Toolbar className="header">
         <Link to="/">
           <img src={logo} alt="logo" />
@@ -42,13 +42,15 @@ export const Header = () => {
           <div>
             <div
               id="basic-button"
-              aria-controls="basic-menu"
+              aria-controls={open ? "basic-menu" : undefined}
               aria-haspopup="true"
               aria-expanded={open ? "true" : undefined}
+              role="button"
+              tabIndex={1}
               onClick={handleClick}
               className="header__avatar"
             >
-              <Avatar alt={user?.email} src={user?.photoURL || user?.email} />
+              <Avatar alt="avatar" src={user?.photoURL || user?.email} />
               <span
                 className="header__email"
                 style={{ fontSize: "12px", color: "#f1c40f" }}
@@ -57,6 +59,7 @@ export const Header = () => {
               </span>
             </div>
             <Menu
+              aria-labelledby="menubutton"
               id="basic-menu"
               anchorEl={anchorEl}
               open={open}
@@ -83,23 +86,31 @@ export const Header = () => {
                 }}
                 onClick={handleLogout}
               >
-                Wyloguj <LogoutIcon />{" "}
+                Wyloguj <LogoutIcon />
               </MenuItem>
             </Menu>
           </div>
         ) : (
-          <div className="header__buttons">
-            <Link className="header__link" to="/signin">
-              <Button className="header__link-button" variant="contained">
+          <nav className="header__buttons">
+            <Link role="button" className="header__link" to="/signin">
+              <Button
+                tabIndex={-1}
+                className="header__link-button"
+                variant="contained"
+              >
                 Zaloguj
               </Button>
             </Link>
-            <Link className="header__link" to="/signup">
-              <Button className="header__link-button" variant="contained">
+            <Link role="button" className="header__link" to="/signup">
+              <Button
+                tabIndex={-1}
+                className="header__link-button"
+                variant="contained"
+              >
                 Zarejestruj
               </Button>
             </Link>
-          </div>
+          </nav>
         )}
       </Toolbar>
     </AppBar>

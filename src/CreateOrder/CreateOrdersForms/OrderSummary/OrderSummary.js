@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Button, Modal } from "@mui/material";
+import { Button } from "@mui/material";
+import OrderSummaryModal from "./OrderSummaryModal";
 import "./OrderSummary.scss";
 
 export const OrderSummary = ({
@@ -19,32 +19,15 @@ export const OrderSummary = ({
   const handleClose = () => setOpen(false);
 
   return (
-    <div className="order-summary">
-      <Modal open={open} onClose={handleClose}>
-        <div className="order-summary__modal">
-          <div className="order-summary__modal__content">
-            <h1 className="order-summary__modal__title">
-              Zamówienie przekazane do realizacji !
-            </h1>
-            <h2 className="order-summary__modal__title">
-              Zamowienie nr. {orderNumber} zostało utworzone i przekazane do
-              realizacji :). Nasz kurier odbiorze twoją paczkę już niedługo !
-            </h2>
-            <Link className="order-summary__modal__link" to="/myprofile">
-              <Button
-                className="order-summary__modal__button"
-                variant="contained"
-                type="submit"
-              >
-                Ok
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </Modal>
+    <main className="order-summary">
+      <OrderSummaryModal
+        handleClose={handleClose}
+        open={open}
+        orderNumber={orderNumber}
+      />
       <h2>Podsumowanie</h2>
-      <div className="order-summary__content">
-        <div>
+      <article className="order-summary__content">
+        <section>
           <div className="order-summary__content--bold">Sczegóły zlecenia</div>
           <div>Zlecił: {formik.values.creator}</div>
           <div>Paczka {formik.values.size}</div>
@@ -63,8 +46,8 @@ export const OrderSummary = ({
           <div>
             Płatność: {cashOnDelivery ? "przy odbiorze" : "internetowa"}
           </div>
-        </div>
-        <div>
+        </section>
+        <section>
           <div className="order-summary__content--bold">
             Dane kontaktowe nadawcy
           </div>
@@ -80,8 +63,8 @@ export const OrderSummary = ({
           </div>
           <div>{formik.values.senderEmail}</div>
           <div>{formik.values.senderPhone}</div>
-        </div>
-        <div>
+        </section>
+        <section>
           <div className="order-summary__content--bold">
             Dane kontaktowe odbiorcy
           </div>
@@ -97,8 +80,8 @@ export const OrderSummary = ({
           </div>
           <div>{formik.values.reciverEmail}</div>
           <div>{formik.values.reciverPhone}</div>
-        </div>
-      </div>
+        </section>
+      </article>
       {cashOnDelivery ? (
         <Button
           className="order-summary__button"
@@ -123,6 +106,6 @@ export const OrderSummary = ({
           </Button>
         </div>
       )}
-    </div>
+    </main>
   );
 };

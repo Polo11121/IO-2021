@@ -8,11 +8,11 @@ import logo from "./logo-footer.png";
 import "./Footer.scss";
 
 export const Footer = () => (
-  <AppBar className="footer" position="static">
+  <AppBar className="footer" role="footer" position="static">
     <Toolbar className="footer__toolbar">
       <div className="footer__toolbar-logo">
-        <img src={logo} alt="logo" />
-        <p className="footer__rights">All rights reserved</p>
+        <img role="img" src={logo} alt="logo" />
+        <span className="footer__rights">All rights reserved</span>
       </div>
       <div className="footer__toolbar-socials">
         <YouTubeIcon className="footer__toolbar-social" fontSize="large" />

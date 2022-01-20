@@ -40,7 +40,7 @@ export const SignUp = () => {
     }),
     onSubmit: ({ email, password }) =>
       createUserWithEmailAndPassword(auth, email, password)
-        .then(async (user) => {
+        .then(async () => {
           await setDoc(doc(db, "users", email), {
             email,
             password,
@@ -49,13 +49,13 @@ export const SignUp = () => {
             navigate("/");
           }
         })
-        .catch((error) => setError(true)),
+        .catch(() => setError(true)),
   });
 
   return (
-    <div className="sign-up" onSubmit={formik.handleSubmit}>
+    <main className="sign-up" onSubmit={formik.handleSubmit}>
       <form className="sign-up__form">
-        <div className="sign-up__form-inputs">
+        <div className="sign-up__form__inputs">
           <TextField
             error={formik.errors.email && formik.touched.email}
             helperText={
@@ -65,7 +65,7 @@ export const SignUp = () => {
             }
             id="email"
             name="email"
-            className="sign-up__form-input"
+            className="sign-up__form__input"
             color="primary"
             label="Email"
             variant="outlined"
@@ -83,7 +83,7 @@ export const SignUp = () => {
             }
             id="password"
             name="password"
-            className="sign-in__form-input"
+            className="sign-in__form__input"
             label="Hasło"
             type="password"
             variant="outlined"
@@ -102,7 +102,7 @@ export const SignUp = () => {
             }
             id="repeatPassword"
             name="repeatPassword"
-            className="sign-in__form-input"
+            className="sign-in__form__input"
             label="Powtórz hasło"
             type="password"
             variant="outlined"
@@ -147,6 +147,6 @@ export const SignUp = () => {
           </Link>
         </p>
       </form>
-    </div>
+    </main>
   );
 };

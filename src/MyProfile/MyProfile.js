@@ -3,12 +3,9 @@ import { AuthContext } from "../contexts/AuthProvider";
 import { Error } from "../Error/Error";
 import { UserProfileInfo } from "./UserPorfileInfo/UserProfileInfo";
 import { OrdersHistory } from "./OrdersHistory/OrdersHistory";
-import CloseIcon from "@mui/icons-material/Close";
-import IconButton from "@mui/material/IconButton";
-import { MenuItem, Modal, Select } from "@mui/material";
 import { doc, collection, getDocs, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
-import box from "./box.svg";
+import MyProfileModal from "./MyProfileModal";
 import "./MyProfile.scss";
 
 export const MyProfile = () => {
@@ -112,81 +109,14 @@ export const MyProfile = () => {
   }, [user, orderInfo]);
 
   return user ? (
-    <div className="my-profile">
-      <Modal open={Boolean(orderInfo)} onClose={handleClose}>
-        <div className="my-profile__modal">
-          <div className="my-profile__modal__content">
-            <IconButton
-              className="my-profile__modal__exit-button"
-              onClick={handleClose}
-            >
-              <CloseIcon />
-            </IconButton>
-            <div className="my-profile__modal__first-row">
-              <div className="my-profile__modal__box">
-                <img src={box} height="250px" />
-              </div>
-              <div style={{ paddingLeft: "20px" }}>
-                <div>
-                  <h2>Zamówienie nr. {orderInfo?.id}</h2>
-                  <div>Data utworzenia: {orderInfo?.data.createDate}</div>
-                  <div>
-                    Data aktualizacji statusu: {orderInfo?.data.updateDate}
-                  </div>
-                  <div>
-                    Status płatności:{" "}
-                    {orderInfo?.data.cashOnDelivery
-                      ? "Przy odbiorze"
-                      : "Opłacona"}
-                  </div>
-                  {user?.displayName ? (
-                    <div>
-                      <span>Status przesyłki:</span>
-                      <Select
-                        className="my-profile__modal__select"
-                        fullWidth
-                        onChange={handleSelect}
-                        value={orderInfoStatus}
-                      >
-                        <MenuItem value="Przyjęta do realizacji">
-                          Przyjęta do realizacji
-                        </MenuItem>
-                        <MenuItem value="Odebrana od nadawcy">
-                          Odebrana od nadawcy
-                        </MenuItem>
-                        <MenuItem value="W drodze do sortowni">
-                          W drodze do sortowni
-                        </MenuItem>
-                        <MenuItem value="W sortowni">W sortowni</MenuItem>
-                        <MenuItem value="W drodze do odbiorcy">
-                          W drodze do odbiorcy
-                        </MenuItem>
-                        <MenuItem value="Dostarczona">Dostarczona</MenuItem>
-                      </Select>
-                    </div>
-                  ) : (
-                    <div>Status przesyłki: {orderInfo?.data.status}</div>
-                  )}
-                </div>
-                <div className="my-profile__modal__second-row">
-                  <div>
-                    <div>Dane nadawcy:</div>
-                    <div>{orderInfo?.data.sender.street}</div>{" "}
-                    <div>{orderInfo?.data.sender.postCode}</div>
-                    <div>{orderInfo?.data.sender.name}</div>
-                  </div>
-                  <div>
-                    <div>Dane dostawcy:</div>
-                    <div>{orderInfo?.data.reciver.street}</div>
-                    <div>{orderInfo?.data.reciver.postCode}</div>
-                    <div>{orderInfo?.data.reciver.name}</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Modal>
+    <main className="my-profile">
+      <MyProfileModal
+        orderInfo={orderInfo}
+        orderInfoStatus={orderInfoStatus}
+        handleClose={handleClose}
+        handleSelect={handleSelect}
+        user={user}
+      />
       <div className="my-profile__info">
         <UserProfileInfo
           orders={orders}
@@ -197,7 +127,7 @@ export const MyProfile = () => {
       <div className="my-profile__orders">
         <OrdersHistory setOrderInfo={setOrderInfo} orders={orders} />
       </div>
-    </div>
+    </main>
   ) : (
     <Error />
   );

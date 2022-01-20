@@ -4,7 +4,7 @@ import emoji from "./emoji.png";
 import "./Error.scss";
 
 export const Error = () => (
-  <div className="error">
+  <main className="error">
     <div className="error__content">
       <img className="error__photo" src={emoji} alt="" />
       <p>Dostępne tylko dla zalogowanych użytkowników!</p>
@@ -15,11 +15,11 @@ export const Error = () => (
         </Link>
       </p>
       <p className="error__text">
-        Nie masz konta ?{" "}
+        Nie masz konta ?
         <Link className="error__link" to="/signup">
           Zarejestruj się
         </Link>
       </p>
     </div>
-  </div>
+  </main>
 );

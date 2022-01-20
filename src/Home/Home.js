@@ -10,28 +10,28 @@ export const Home = () => {
   const user = useContext(AuthContext);
 
   return (
-    <div className="home">
+    <main className="home">
       {user?.displayName ? (
         <h1 style={{ textAlign: "center" }} className="home__title">
           Miłej pracy {user?.displayName} !
         </h1>
       ) : (
-        <div className="home__buttons">
-          <Link className="home__link" to="/createorder">
-            <Button className="home__button" variant="contained">
+        <nav role="menu" className="home__buttons">
+          <Link role="button" className="home__link" to="/createorder">
+            <Button tabIndex={-1} className="home__button" variant="contained">
               Utwórz nowe zamówienie
             </Button>
           </Link>
-          <Link className="home__link" to="/checkstatus">
-            <Button className="home__button" variant="contained">
+          <Link role="button" className="home__link" to="/checkstatus">
+            <Button tabIndex={-1} className="home__button" variant="contained">
               Sprawdź status zamówienia
             </Button>
           </Link>
-        </div>
+        </nav>
       )}
-      <div className="home__info">
-        <img className="home__photo" src={photo} alt="kurier" />
-        <div className="home__text">
+      <section className="home__info">
+        <img role="img" className="home__photo" src={photo} alt="kurier" />
+        <p className="home__text">
           Firm kurierska KKJS zajmuje się zatrudnianiem kurierów oraz
           transportem przesyłek na terenie kraju. Firma świadczy usługi dla
           klientów prywatnych oraz instytucjonalnych. Firma współpracuje z
@@ -40,9 +40,15 @@ export const Home = () => {
           świadczą o naszym profesjonalym podejściu do klienta. Bez względu na
           to, czy jesteś klientem indywidualnym czy biznesowym - KKJS ma dla
           ciebie odpowiednie rozwiązanie.
-        </div>
-        <img className="home__box" height="250px" src={box} alt="" />
-      </div>
-    </div>
+        </p>
+        <img
+          role="img"
+          className="home__box"
+          height="250px"
+          src={box}
+          alt="przesyłka"
+        />
+      </section>
+    </main>
   );
 };

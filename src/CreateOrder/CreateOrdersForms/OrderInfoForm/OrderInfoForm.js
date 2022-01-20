@@ -64,6 +64,8 @@ export const OrderInfoForm = ({
 
   const IOSSwitch = styled((props) => (
     <Switch
+      role="switch"
+      inputProps={{ "aria-label": "controlled" }}
       checked={!!cashOnDelivery}
       onBlur={formik.handleBlur}
       onChange={handleSwitchChange}
@@ -151,26 +153,44 @@ export const OrderInfoForm = ({
         <img src={packageSizeInfo[formik.values.size].image} alt="" />
       </div>
       <h3>Paczka {formik.values.size}</h3>
-      <div className="order-info-form__size__info">
-        <div>
+      <article className="order-info-form__size__info">
+        <section
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
           <span className="order-info-form__size__info--bold">
             {packageSizeInfo[formik.values.size].weight}
           </span>
           maksymalnej wagi
-        </div>
-        <div>
+        </section>
+        <section
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
           <span className="order-info-form__size__info--bold">
             {packageSizeInfo[formik.values.size].size}
           </span>
           suma najkrótszego i najdłuższego boku
-        </div>
-        <div>
+        </section>
+        <section
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
           <span className="order-info-form__size__info--bold">
             {packageSizeInfo[formik.values.size].descp}
           </span>
           {packageSizeInfo[formik.values.size].example}
-        </div>
-      </div>
+        </section>
+      </article>
       <h2>Opcje i usługi dodatkowe</h2>
       <h3
         style={{
@@ -182,8 +202,8 @@ export const OrderInfoForm = ({
       >
         Wpisz wartość paczki i wybierz usługi dodatkowe
       </h3>
-      <div style={{ width: "70%", marginBottom: "50px" }}>
-        <div className="order-info-form__info">
+      <article style={{ width: "70%", marginBottom: "50px" }}>
+        <section className="order-info-form__info">
           <div className="order-info-form__info__label">
             Kto zleca usługe kurierską?
           </div>
@@ -200,8 +220,8 @@ export const OrderInfoForm = ({
               <MenuItem value="Odbiorca">Odbiorca</MenuItem>
             </Select>
           </div>
-        </div>
-        <div className="order-info-form__info">
+        </section>
+        <section className="order-info-form__info">
           <div className="order-info-form__info__label">
             Wpisz wartość paczki
           </div>
@@ -226,8 +246,8 @@ export const OrderInfoForm = ({
               onBlur={formik.handleBlur}
             />
           </div>
-        </div>
-        <div className="order-info-form__info">
+        </section>
+        <section className="order-info-form__info">
           <div className="order-info-form__info__label">
             Paczka pobraniowa Płatność przez adresata przy odbiorze
           </div>
@@ -235,8 +255,8 @@ export const OrderInfoForm = ({
             <span style={{ fontWeight: "bold" }}>+6,50 PLN</span>
             <IOSSwitch />
           </div>
-        </div>
-      </div>
+        </section>
+      </article>
     </form>
   );
 };
