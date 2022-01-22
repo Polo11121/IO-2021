@@ -22,7 +22,7 @@ export const OrderCard = ({
     <span className="order-card__row">{createDate}</span>
     <span className="order-card__row">{updateDate}</span>
     <span className="order-card__row">
-      {cashOnDelivery ? "Przy odbiorze" : "Opłacona"}
+      {cashOnDelivery ? "Przy odbiorze" : "Opłacone"}
     </span>
     <span className="order-card__row">{status}</span>
     <ReactTooltip

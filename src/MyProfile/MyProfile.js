@@ -3,13 +3,21 @@ import { AuthContext } from "../contexts/AuthProvider";
 import { Error } from "../Error/Error";
 import { UserProfileInfo } from "./UserPorfileInfo/UserProfileInfo";
 import { OrdersHistory } from "./OrdersHistory/OrdersHistory";
-import { doc, collection, getDocs, updateDoc } from "firebase/firestore";
+import {
+  doc,
+  collection,
+  getDocs,
+  updateDoc,
+  getDoc,
+  setDoc,
+} from "firebase/firestore";
 import { db } from "../firebase";
 import MyProfileModal from "./MyProfileModal";
 import "./MyProfile.scss";
 
 export const MyProfile = () => {
   const [orders, setOrders] = useState(null);
+  const [courierType, setCourierType] = useState(null);
   const [orderInfo, setOrderInfo] = useState(null);
   const [orderInfoStatus, setOrderInfoStatus] = useState(null);
   const user = useContext(AuthContext);
@@ -42,31 +50,96 @@ export const MyProfile = () => {
         minutes +
         ":" +
         seconds;
-      await updateDoc(doc(db, "orders", `${orderInfo?.id}`), {
-        status: orderInfoStatus,
-        updateDate: actualDate,
+      const collectionRef = collection(db, "couriers");
+      const querySnapshot = await getDocs(collectionRef);
+      const querySnapshotTable = [];
+      querySnapshot.forEach((doc) => {
+        if (doc.data().type === "delivery") {
+          querySnapshotTable.push(doc.id);
+        }
       });
-      await updateDoc(
-        doc(
-          db,
-          "users",
-          `${orderInfo?.data?.user}`,
-          "orders",
-          `${orderInfo?.id}`
-        ),
-        { status: orderInfoStatus, updateDate: actualDate }
-      );
-      await updateDoc(
-        doc(
-          db,
-          "couriers",
-          `${orderInfo?.data?.courier}`,
-          "orders",
-          `${orderInfo?.id}`
-        ),
-        { status: orderInfoStatus, updateDate: actualDate }
-      );
+      const courier =
+        querySnapshotTable[
+          Math.floor(Math.random() * querySnapshotTable.length)
+        ];
+
+      const newOrderInfo = {
+        user: orderInfo?.data?.user,
+        courier,
+        orderValue: orderInfo?.data?.orderValue,
+        orderCost: orderInfo?.data?.orderCost,
+        size: orderInfo?.data?.size,
+        creator: orderInfo?.data?.creator,
+        cashOnDelivery: orderInfo?.data?.cashOnDelivery,
+        status: "Gotowe do odbioru z sortowni",
+        createDate: orderInfo?.data?.createDate,
+        updateDate: actualDate,
+        sender: orderInfo?.data?.sender,
+        reciver: orderInfo?.data?.reciver,
+      };
+
+      if (orderInfoStatus === "Przekazane do sortowni") {
+        await updateDoc(doc(db, "orders", `${orderInfo?.id}`), {
+          status: "Gotowe do odbioru z sortowni",
+          updateDate: actualDate,
+          courier,
+        });
+        await updateDoc(
+          doc(
+            db,
+            "users",
+            `${orderInfo?.data?.user}`,
+            "orders",
+            `${orderInfo?.id}`
+          ),
+          {
+            status: "Gotowe do odbioru z sortowni",
+            updateDate: actualDate,
+            courier,
+          }
+        );
+        await updateDoc(
+          doc(
+            db,
+            "couriers",
+            `${orderInfo?.data?.courier}`,
+            "orders",
+            `${orderInfo?.id}`
+          ),
+          { status: orderInfoStatus, updateDate: actualDate }
+        );
+        await setDoc(
+          doc(db, "couriers", `${courier}`, "orders", `${orderInfo?.id}`),
+          newOrderInfo
+        );
+      } else {
+        await updateDoc(doc(db, "orders", `${orderInfo?.id}`), {
+          status: orderInfoStatus,
+          updateDate: actualDate,
+        });
+        await updateDoc(
+          doc(
+            db,
+            "couriers",
+            `${orderInfo?.data?.courier}`,
+            "orders",
+            `${orderInfo?.id}`
+          ),
+          { status: orderInfoStatus, updateDate: actualDate }
+        );
+        await updateDoc(
+          doc(
+            db,
+            "users",
+            `${orderInfo?.data?.user}`,
+            "orders",
+            `${orderInfo?.id}`
+          ),
+          { status: orderInfoStatus, updateDate: actualDate }
+        );
+      }
     }
+
     setOrderInfo(null);
   };
 
@@ -85,6 +158,13 @@ export const MyProfile = () => {
       const collectionRef = user?.displayName
         ? collection(db, "couriers", user?.displayName, "orders")
         : collection(db, "users", user?.email, "orders");
+      if (user?.displayName) {
+        const courierType = await getDoc(
+          doc(db, "couriers", user?.displayName)
+        );
+
+        setCourierType(courierType.data().type);
+      }
       const querySnapshot = await getDocs(collectionRef);
       const querySnapshotTable = [];
       if (querySnapshot) {
@@ -116,16 +196,22 @@ export const MyProfile = () => {
         handleClose={handleClose}
         handleSelect={handleSelect}
         user={user}
+        courierType={courierType}
       />
       <div className="my-profile__info">
         <UserProfileInfo
+          courierType={courierType}
           orders={orders}
           isCourier={!!user?.displayName}
           user={user}
         />
       </div>
       <div className="my-profile__orders">
-        <OrdersHistory setOrderInfo={setOrderInfo} orders={orders} />
+        <OrdersHistory
+          setOrderInfo={setOrderInfo}
+          orders={orders}
+          courierType={courierType}
+        />
       </div>
     </main>
   ) : (

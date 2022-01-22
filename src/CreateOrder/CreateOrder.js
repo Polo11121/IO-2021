@@ -150,7 +150,9 @@ export const CreateOrder = () => {
       const querySnapshot = await getDocs(collectionRef);
       const querySnapshotTable = [];
       querySnapshot.forEach((doc) => {
-        querySnapshotTable.push(doc.id);
+        if (doc.data().type === "collector") {
+          querySnapshotTable.push(doc.id);
+        }
       });
       const courier =
         querySnapshotTable[
@@ -196,7 +198,7 @@ export const CreateOrder = () => {
         size: data.size,
         creator: data.creator,
         cashOnDelivery,
-        status: "Przyjęta do realizacji",
+        status: "Przyjęte do realizacji",
         createDate: actualDate,
         updateDate: actualDate,
         sender: {

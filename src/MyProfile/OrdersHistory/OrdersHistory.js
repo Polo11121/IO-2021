@@ -5,7 +5,7 @@ import { OrdersHistoryModal } from "./OrdersHistoryModal";
 import { AuthContext } from "../../contexts/AuthProvider";
 import "./OrdersHistory.scss";
 
-export const OrdersHistory = ({ orders, setOrderInfo }) => {
+export const OrdersHistory = ({ orders, setOrderInfo, courierType }) => {
   const [isActiveOrders, setIsActiveOrders] = useState(true);
   const [open, setOpen] = useState(false);
   const [filters, setFilters] = useState({
@@ -51,7 +51,7 @@ export const OrdersHistory = ({ orders, setOrderInfo }) => {
 
   const filterByPayFilter = (orders) =>
     filters.payFilter
-      ? (!orders.data.cashOnDelivery && filters.payFilter === "Opłacona") ||
+      ? (!orders.data.cashOnDelivery && filters.payFilter === "Opłacone") ||
         (orders.data.cashOnDelivery && filters.payFilter === "Przy odbiorze")
       : orders;
 
@@ -170,7 +170,11 @@ export const OrdersHistory = ({ orders, setOrderInfo }) => {
 
   const activeOrders = orders?.filter(
     ({ id, data }) =>
-      data?.status !== "Dostarczona" && (
+      (data?.status !== "Przekazane do sortowni" &&
+        courierType === "collector") ||
+      (data?.status !== "Dostarczone do odbiorcy" &&
+        courierType === "delivery") ||
+      (!user?.displayName && (
         <OrderCard
           orderNumber={id}
           createDate={data.createDate}
@@ -178,12 +182,13 @@ export const OrdersHistory = ({ orders, setOrderInfo }) => {
           cashOnDelivery={data.cashOnDelivery}
           status={data.status}
         />
-      )
+      ))
   );
 
   return (
     <section className="orders-history">
       <OrdersHistoryModal
+        courierType={courierType}
         open={open}
         handleClose={handleClose}
         filters={filters}

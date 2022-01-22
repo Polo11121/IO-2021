@@ -94,7 +94,15 @@ export const OrderSummary = ({
       ) : (
         <div className="order-summary__to-pay">
           <span style={{ fontWeight: "bold", fontSize: "22px" }}>
-            Do zapłaty: {cashOnDelivery ? cost + cashOnDelivery : cost} PLN
+            Do zapłaty:{" "}
+            {cashOnDelivery
+              ? `${cost + 6.5}`.length < 5
+                ? `${cost + 6.5}0`
+                : `${cost + 6.5}`
+              : `${cost}`.length < 5
+              ? `${cost}0`
+              : `${cost}`}{" "}
+            PLN
           </span>
           <Button
             className="order-summary__button"

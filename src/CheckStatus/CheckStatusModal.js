@@ -12,10 +12,10 @@ export const CheckStatusModal = ({ open, handleClose, formik, order }) => (
           <section>
             <div>Data utworzenia: {order?.createDate}</div>
             <div>Data aktualizacji statusu: {order?.updateDate}</div>
-            <div>Status przesyłki: {order?.status}</div>
+            <div>Status zamówienia: {order?.status}</div>
             <div>
               Status płatności:{" "}
-              {order?.cashOnDelivery ? "Przy odbiorze" : "Opłacona"}
+              {order?.cashOnDelivery ? "Przy odbiorze" : "Opłacone"}
             </div>
           </section>
           <section>

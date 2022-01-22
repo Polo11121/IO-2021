@@ -17,6 +17,7 @@ export const OrdersHistoryModal = ({
   open,
   handleClose,
   filters,
+  courierType,
   setFilters,
 }) => (
   <Modal open={open} onClose={handleClose}>
@@ -50,7 +51,7 @@ export const OrdersHistoryModal = ({
             marginTop: "10px",
           }}
         >
-          <span>Status przesyłki:</span>
+          <span>Status zamówienia:</span>
           <Select
             value={filters.statusFilter}
             onChange={(event) =>
@@ -59,18 +60,27 @@ export const OrdersHistoryModal = ({
             className="orders-history__modal__select"
             fullWidth
           >
-            <MenuItem value="Przyjęta do realizacji">
-              Przyjęta do realizacji
-            </MenuItem>
-            <MenuItem value="Odebrana od nadawcy">Odebrana od nadawcy</MenuItem>
-            <MenuItem value="W drodze do sortowni">
-              W drodze do sortowni
-            </MenuItem>
-            <MenuItem value="W sortowni">W sortowni</MenuItem>
-            <MenuItem value="W drodze do odbiorcy">
-              W drodze do odbiorcy
-            </MenuItem>
-            <MenuItem value="Dostarczona">Dostarczona</MenuItem>
+            {courierType === "collector"
+              ? [
+                  "Przyjęte do realizacji",
+                  "Odebrane od nadawcy",
+                  "W drodze do sortowni",
+                  "Przekazane do sortowni",
+                ].map((status) => (
+                  <MenuItem key={status} value={status}>
+                    {status}
+                  </MenuItem>
+                ))
+              : [
+                  "Gotowe do odbioru z sortowni",
+                  "Odebrane z sortowni",
+                  "W drodze do odbiorcy",
+                  "Dostarczone do odbiorcy",
+                ].map((status) => (
+                  <MenuItem key={status} value={status}>
+                    {status}
+                  </MenuItem>
+                ))}
             <MenuItem value="">Anuluj</MenuItem>
           </Select>
         </div>
@@ -92,7 +102,7 @@ export const OrdersHistoryModal = ({
             fullWidth
           >
             <MenuItem value="Przy odbiorze">Przy odbiorze</MenuItem>
-            <MenuItem value="Opłacona">Opłacona</MenuItem>
+            <MenuItem value="Opłacone">Opłacone</MenuItem>
             <MenuItem value="">Anuluj</MenuItem>
           </Select>
         </div>

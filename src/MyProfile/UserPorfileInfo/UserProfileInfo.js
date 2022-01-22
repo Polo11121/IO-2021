@@ -2,7 +2,7 @@ import React from "react";
 import { Avatar } from "@mui/material";
 import "./UserProfileInfo.scss";
 
-export const UserProfileInfo = ({ user, isCourier, orders }) =>
+export const UserProfileInfo = ({ user, isCourier, orders, courierType }) =>
   isCourier ? (
     <section className="user-profile-info">
       <Avatar
@@ -11,11 +11,21 @@ export const UserProfileInfo = ({ user, isCourier, orders }) =>
         src={user?.photoURL}
         className="user-profile-info__avatar"
       ></Avatar>
-      <h1 style={{ paddingBottom: "0", marginBottom: 0 }}>Kurier</h1>
-      <h2 style={{ paddingTop: "0", marginTop: 0 }}>Piotr Kowal</h2>
+      <h1 style={{ paddingBottom: "0", marginBottom: 0 }}>
+        Kurier {courierType === "collector" ? "Odbierający" : "Rozwożący"}
+      </h1>
+      <h2 style={{ paddingTop: "0", marginTop: 0 }}>{user?.displayName}</h2>
       <h3>
         Aktywne zamówienia:{" "}
-        {orders?.filter(({ id, data }) => data.status !== "Dostarczona").length}
+        {
+          orders?.filter(
+            ({ id, data }) =>
+              (courierType === "collector" &&
+                data.status !== "Przekazane do sortowni") ||
+              (courierType === "delivery" &&
+                data.status !== "Dostarczone do odbiorcy")
+          ).length
+        }
       </h3>
       <h3 style={{ paddingTop: "0", marginTop: 0 }}>
         Wszystkie zamówienia: {orders?.length}
