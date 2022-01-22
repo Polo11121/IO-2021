@@ -13,7 +13,7 @@ export const OrderSummaryModal = ({ open, handleClose, orderNumber }) => (
           Zamowienie nr. {orderNumber} zostało utworzone i przekazane do
           realizacji :). Nasz kurier odbiorze twoją paczkę już niedługo !
         </h2>
-        <Link className="order-summary__modal__link" to="/myprofile">
+        <div className="order-summary__modal__link">
           <Button
             className="order-summary__modal__button"
             variant="contained"
@@ -21,7 +21,7 @@ export const OrderSummaryModal = ({ open, handleClose, orderNumber }) => (
           >
             Ok
           </Button>
-        </Link>
+        </div>
       </div>
     </article>
   </Modal>

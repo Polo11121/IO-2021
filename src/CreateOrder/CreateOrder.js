@@ -225,6 +225,7 @@ export const CreateOrder = () => {
         doc(db, "couriers", `${courier}`, "orders", `${orderNumber}`),
         orderInfo
       );
+      navigate("/myprofile");
     },
   });
 
