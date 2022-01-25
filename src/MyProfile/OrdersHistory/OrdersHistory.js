@@ -174,7 +174,7 @@ export const OrdersHistory = ({ orders, setOrderInfo, courierType }) => {
         courierType === "collector") ||
       (data?.status !== "Dostarczone do odbiorcy" &&
         courierType === "delivery") ||
-      (!user?.displayName && (
+      (!user?.displayName && data?.status !== "Dostarczone do odbiorcy" && (
         <OrderCard
           orderNumber={id}
           createDate={data.createDate}
